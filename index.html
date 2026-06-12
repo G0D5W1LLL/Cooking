@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>git
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -411,4 +411,418 @@ footer {
       <div><div class="hstat-num">40+</div><div class="hstat-label">Countries</div></div>
     </div>
   </div>
-  <div clas
+  <div class="hero-right">
+    <div class="hero-featured-card" onclick="openRecipe(0)">
+      <div class="hfc-visual"><span>🍲</span><div class="hfc-tag">⭐ Recipe of the Day</div></div>
+      <div class="hfc-body">
+        <div class="hfc-origin">🇳🇬 Nigeria · West Africa</div>
+        <div class="hfc-name">Egusi Soup with Pounded Yam</div>
+        <div class="hfc-meta"><span>⏱ 90 min</span><span>👤 4 servings</span><span>🔥 Medium</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGION PILLS -->
+<div class="regions-strip" id="regionStrip">
+  <div class="region-pill active" onclick="filterRegion('all',null)"><span class="region-flag">🌍</span> All Cuisines</div>
+  <div class="region-pill" onclick="filterRegion('west-africa',null)"><span class="region-flag">🇳🇬</span> West Africa</div>
+  <div class="region-pill" onclick="filterRegion('east-africa',null)"><span class="region-flag">🇪🇹</span> East Africa</div>
+  <div class="region-pill" onclick="filterRegion('japan',null)"><span class="region-flag">🇯🇵</span> Japan</div>
+  <div class="region-pill" onclick="filterRegion('india',null)"><span class="region-flag">🇮🇳</span> India</div>
+  <div class="region-pill" onclick="filterRegion('china',null)"><span class="region-flag">🇨🇳</span> China</div>
+  <div class="region-pill" onclick="filterRegion('italy',null)"><span class="region-flag">🇮🇹</span> Italy</div>
+  <div class="region-pill" onclick="filterRegion('france',null)"><span class="region-flag">🇫🇷</span> France</div>
+  <div class="region-pill" onclick="filterRegion('mexico',null)"><span class="region-flag">🇲🇽</span> Mexico</div>
+  <div class="region-pill" onclick="filterRegion('middleeast',null)"><span class="region-flag">🇱🇧</span> Middle East</div>
+  <div class="region-pill" onclick="filterRegion('thailand',null)"><span class="region-flag">🇹🇭</span> Thailand</div>
+  <div class="region-pill" onclick="filterRegion('spain',null)"><span class="region-flag">🇪🇸</span> Spain</div>
+  <div class="region-pill" onclick="filterRegion('peru',null)"><span class="region-flag">🇵🇪</span> Peru</div>
+</div>
+
+<!-- ALL RECIPES -->
+<div class="section" id="all-recipes">
+  <div class="sec-header">
+    <div>
+      <div class="sec-eyebrow">World Kitchen</div>
+      <h2 class="sec-title">All <em>Recipes</em></h2>
+    </div>
+    <span class="view-all" id="recipeCount">Showing all recipes</span>
+  </div>
+  <div class="recipe-grid" id="recipeGrid"></div>
+</div>
+
+<!-- WORLD STRIP -->
+<div class="world-strip">
+  <h2 class="ws-title">Explore by <em>Continent</em></h2>
+  <p class="ws-sub">Every culture has something delicious to offer. Where do you want to travel today?</p>
+  <div class="continent-btns">
+    <div class="cont-btn" onclick="filterRegion('africa',null)"><span class="cont-icon">🌍</span> Africa</div>
+    <div class="cont-btn" onclick="filterRegion('asia',null)"><span class="cont-icon">🌏</span> Asia</div>
+    <div class="cont-btn" onclick="filterRegion('europe',null)"><span class="cont-icon">🏰</span> Europe</div>
+    <div class="cont-btn" onclick="filterRegion('americas',null)"><span class="cont-icon">🌎</span> Americas</div>
+    <div class="cont-btn" onclick="filterRegion('middleeast',null)"><span class="cont-icon">🕌</span> Middle East</div>
+    <div class="cont-btn" onclick="filterRegion('oceania',null)"><span class="cont-icon">🏝️</span> Oceania</div>
+  </div>
+</div>
+
+<!-- CUISINE SPOTLIGHT -->
+<div class="section">
+  <div class="sec-header">
+    <div>
+      <div class="sec-eyebrow">Editor's Pick</div>
+      <h2 class="sec-title">Cuisine <em>Spotlight</em></h2>
+    </div>
+  </div>
+  <div class="spotlight-grid">
+    <div class="spotlight-main" onclick="openRecipe(2)">
+      <div class="sm-visual"><span>🍜</span><div class="sm-badge">🇯🇵 Japanese</div></div>
+      <div class="sm-body">
+        <div class="sm-origin">Japan · Asia</div>
+        <div class="sm-name">Tonkotsu Ramen</div>
+        <div class="sm-desc">A soul-warming bowl of creamy pork-bone broth, springy noodles, melt-in-your-mouth chashu pork, and a perfectly soft-boiled marinated egg. A Japanese comfort food icon.</div>
+        <div class="sm-tags">
+          <div class="tag">Comfort Food</div>
+          <div class="tag">4 hrs</div>
+          <div class="tag">Hard</div>
+          <div class="tag">Pork</div>
+        </div>
+      </div>
+    </div>
+    <div class="spotlight-list" id="spotlightList"></div>
+  </div>
+</div>
+
+<!-- QUICK & EASY -->
+<div class="section" style="background:var(--paper); border-radius:16px; margin:0 1.5rem 2rem;">
+  <div class="sec-header">
+    <div>
+      <div class="sec-eyebrow">Under 30 Minutes</div>
+      <h2 class="sec-title">Quick & <em>Easy</em></h2>
+    </div>
+  </div>
+  <div class="wide-grid" id="quickGrid"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">SaveurMonde</div>
+      <div class="footer-tagline">Celebrating the world's culinary heritage, one recipe at a time.</div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <a>African Recipes</a><a>Asian Recipes</a><a>European Recipes</a><a>American Recipes</a>
+    </div>
+    <div class="footer-col">
+      <h4>Categories</h4>
+      <a>Breakfast</a><a>Street Food</a><a>Desserts</a><a>Vegetarian</a>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <a>Submit a Recipe</a><a>Food Stories</a><a>Newsletter</a><a>About Us</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">©️ 2025 SaveurMonde. Connecting the world through food.</span>
+    <span style="font-size:.8rem;">🍽️ Made with love for food lovers everywhere</span>
+  </div>
+</footer>
+
+<!-- RECIPE MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+const recipes = [
+  // AFRICA
+  { id:0, emoji:'🍲', name:'Egusi Soup', country:'Nigeria', flag:'🇳🇬', region:'west-africa', continent:'africa',
+    desc:'A hearty West African classic made with ground melon seeds, leafy greens, assorted meats and fish, slow-cooked in a rich palm oil base. Best eaten with pounded yam or eba.',
+    time:'90 min', servings:4, diff:'Medium', kcal:'520',
+    tags:['West African','Comfort Food','Gluten-Free','Soup'],
+    ingredients:['500g egusi (ground melon seeds)','Assorted beef & goat meat','2 stockfish portions','Palm oil, ½ cup','Bitter leaf or spinach','2 medium onions','Crayfish, 2 tbsp','Scotch bonnet peppers','Seasoning cubes','Salt to taste'],
+    steps:['Blend tomatoes, onions and peppers. Set aside.','Parboil meats with seasonings until tender.','Heat palm oil, fry egusi until golden and aromatic.','Add blended pepper mix and fry for 15 minutes.','Add stock, meats, and crayfish. Simmer 20 minutes.','Stir in washed bitter leaf or spinach.','Adjust seasoning. Serve with pounded yam.']
+  },
+  { id:1, emoji:'🥘', name:'Injera & Doro Wat', country:'Ethiopia', flag:'🇪🇹', region:'east-africa', continent:'africa',
+    desc:'Ethiopia\'s national dish — a fiery, complex chicken stew (doro wat) made with berbere spice paste, served atop injera, a tangy fermented teff flatbread.',
+    time:'3 hrs', servings:6, diff:'Hard', kcal:'610',
+    tags:['East African','Spicy','Fermented','Traditional'],
+    ingredients:['1 whole chicken, portioned','Injera flatbreads','Berbere spice paste, 4 tbsp','Niter kibbeh (spiced butter)','Red onions, 6 large','Garlic & ginger paste','Hard-boiled eggs','Tomato paste'],
+    steps:['Caramelize onions dry for 45 minutes until dark.','Add niter kibbeh and berbere; fry 10 minutes.','Add chicken pieces; brown all sides.','Add water; simmer covered 1 hour.','Add scored boiled eggs in final 20 minutes.','Serve on injera with ayib cheese on the side.']
+  },
+  { id:2, emoji:'🌿', name:'Jollof Rice', country:'Ghana / Nigeria', flag:'🇬🇭', region:'west-africa', continent:'africa',
+    desc:'The legendary West African party staple — long-grain rice cooked in a smoky tomato-pepper sauce until perfectly infused. Smoky bottom crust is the crown jewel.',
+    time:'75 min', servings:8, diff:'Easy', kcal:'420',
+    tags:['West African','Party Food','Rice','Vegetarian Option'],
+    ingredients:['4 cups parboiled rice','Blended tomatoes & peppers','Chicken stock, 3 cups','Onion, 1 large','Palm or vegetable oil','Bay leaves, thyme, curry','Seasoning cubes','Salt'],
+    steps:['Fry blended peppers in oil until dry and dark, ~30 min.','Add stock and seasonings. Bring to boil.','Wash rice; add to pot. Stir well.','Cover tightly and cook on low heat until done.','Allow to steam for 10 minutes before serving.']
+  },
+  { id:3, emoji:'🥗', name:'Moroccan Tagine', country:'Morocco', flag:'🇲🇦', region:'africa', continent:'africa',
+    desc:'Slow-cooked lamb tagine with preserved lemons, olives, and a fragrant blend of ras el hanout spices. The conical clay pot creates a self-basting steam that makes the meat fall off the bone.',
+    time:'2.5 hrs', servings:4, diff:'Medium', kcal:'580',
+    tags:['North African','Slow Cook','Lamb','Spiced'],
+    ingredients:['1kg lamb shoulder','Preserved lemon, 2','Green olives, ½ cup','Ras el hanout, 2 tbsp','Onion, ginger, garlic','Saffron, pinch','Coriander & parsley','Olive oil'],
+    steps:['Marinate lamb in spices overnight.','Brown lamb in tagine base with olive oil.','Add onions, ginger, garlic; sauté 10 minutes.','Add saffron-infused water.','Place lid; cook low heat for 2 hours.','Add preserved lemons and olives; cook 20 more minutes.']
+  },
+  // ASIA
+  { id:4, emoji:'🍜', name:'Tonkotsu Ramen', country:'Japan', flag:'🇯🇵', region:'japan', continent:'asia',
+    desc:'Rich creamy pork-bone broth simmered 12+ hours, loaded with chashu pork belly, soft-boiled marinated egg, bamboo shoots, nori, and springy noodles.',
+    time:'4 hrs', servings:4, diff:'Hard', kcal:'680',
+    tags:['Japanese','Comfort Food','Noodles','Pork'],
+    ingredients:['Pork trotters & neck bones','Ramen noodles, 4 portions','Chashu pork belly','Soft-boiled eggs, 4','Bamboo shoots, nori','Green onions, garlic','Soy sauce, mirin','Sesame oil, togarashi'],
+    steps:['Blanch bones; scrub clean. Simmer 10–12 hours.','Season broth with tare (soy-mirin mix).','Slice chashu pork belly thinly.','Marinate boiled eggs in soy-mirin overnight.','Boil noodles fresh; drain.','Assemble bowl: broth, noodles, toppings.']
+  },
+  { id:5, emoji:'🍛', name:'Chicken Tikka Masala', country:'India', flag:'🇮🇳', region:'india', continent:'asia',
+    desc:'Smoky tandoor-charred chicken in a velvety, spiced tomato-cream sauce. A beloved Indian restaurant classic with warm aromatic spices and a beautiful deep orange color.',
+    time:'60 min', servings:4, diff:'Medium', kcal:'490',
+    tags:['Indian','Creamy','Chicken','Curry'],
+    ingredients:['800g chicken thighs','Full-fat yogurt','Garam masala, cumin, coriander','Kashmiri red chilli powder','Butter & cream','Canned tomatoes, 400g','Ginger-garlic paste','Fenugreek leaves'],
+    steps:['Marinate chicken in yogurt and spices 4 hours.','Grill or broil chicken until charred.','Fry onion-ginger-garlic paste until golden.','Add spices; toast 2 minutes. Add tomatoes.','Simmer 20 minutes; blend smooth.','Add cream and charred chicken; simmer 10 minutes.','Finish with butter and kasuri methi.']
+  },
+  { id:6, emoji:'🥟', name:'Xiao Long Bao', country:'China', flag:'🇨🇳', region:'china', continent:'asia',
+    desc:'Shanghai\'s iconic soup dumplings — delicate pleated parcels hiding seasoned pork and rich aspic jelly that melts into soup when steamed. Requires patience and skill.',
+    time:'3 hrs', servings:6, diff:'Hard', kcal:'380',
+    tags:['Chinese','Dumplings','Steamed','Pork'],
+    ingredients:['300g ground pork','Pork skin gelatin (aspic)','Flour dough wrappers','Ginger, soy sauce, Shaoxing wine','Sesame oil, white pepper','Green onions','Black vinegar & ginger (dipping)'],
+    steps:['Make aspic from pork skin; chill until solid. Dice.','Mix pork filling with seasonings.','Fold aspic into filling.','Roll thin wrappers; add filling.','Pleat and seal 18+ folds per dumpling.','Steam on cabbage 8–10 minutes. Eat carefully!']
+  },
+  { id:7, emoji:'🍱', name:'Pad Thai', country:'Thailand', flag:'🇹🇭', region:'thailand', continent:'asia',
+    desc:'Thailand\'s most beloved street food — stir-fried rice noodles with shrimp, tofu, eggs, bean sprouts, and tamarind sauce, finished with crushed peanuts and lime.',
+    time:'25 min', servings:2, diff:'Easy', kcal:'520',
+    tags:['Thai','Street Food','Noodles','Quick'],
+    ingredients:['Rice noodles, 200g','Prawns & firm tofu','2 eggs','Tamarind paste, 3 tbsp','Fish sauce, soy sauce','Palm sugar, 2 tbsp','Bean sprouts, chives','Crushed peanuts, lime'],
+    steps:['Soak noodles in warm water 30 min; drain.','Fry tofu golden; set aside.','Stir-fry prawns in hot wok.','Push to side; scramble eggs.','Add noodles, sauce; toss on high heat.','Add sprouts; serve with peanuts & lime wedges.']
+  },
+  // EUROPE
+  { id:8, emoji:'🍝', name:'Spaghetti Carbonara', country:'Italy', flag:'🇮🇹', region:'italy', continent:'europe',
+    desc:'The Roman classic done right — no cream. Just guanciale, Pecorino Romano, eggs, black pepper, and pasta water to create the silkiest sauce imaginable.',
+    time:'25 min', servings:2, diff:'Medium', kcal:'640',
+    tags:['Italian','Pasta','Roman','No Cream'],
+    ingredients:['Spaghetti, 200g','Guanciale (or pancetta), 100g','3 egg yolks + 1 whole egg','Pecorino Romano, 80g grated','Black pepper, freshly ground','Pasta water','Salt'],
+    steps:['Boil pasta in well-salted water.','Fry guanciale until crispy; reserve fat.','Whisk eggs and cheese together.','Remove pan from heat; add cooked pasta.','Add egg mix; toss rapidly adding pasta water.','The heat should cook egg without scrambling. Serve immediately.']
+  },
+  { id:9, emoji:'🥐', name:'Beef Bourguignon', country:'France', flag:'🇫🇷', region:'france', continent:'europe',
+    desc:'Julia Child\'s legendary French braised beef — slow-cooked in Burgundy wine with lardons, mushrooms, pearl onions, and aromatic herbs until impossibly tender.',
+    time:'4 hrs', servings:6, diff:'Medium', kcal:'620',
+    tags:['French','Braised','Wine','Comfort'],
+    ingredients:['1.5kg beef chuck, cubed','Burgundy wine, 750ml','Lardons (bacon), 200g','Pearl onions, 200g','Cremini mushrooms, 300g','Carrots, celery, onion','Bouquet garni, tomato paste','Butter, flour'],
+    steps:['Marinate beef in wine overnight.','Pat dry; brown in batches. Set aside.','Cook lardons until crisp.','Sauté vegetables; add tomato paste.','Deglaze with wine; add beef.','Braise in oven 2.5–3 hours at 160°C.','Add mushrooms and pearl onions last hour.']
+  },
+  { id:10, emoji:'🥘', name:'Paella Valenciana', country:'Spain', flag:'🇪🇸', region:'spain', continent:'europe',
+    desc:'Spain\'s iconic saffron rice dish with chicken, rabbit, and green beans, cooked in a wide paellera over an open fire until the prized socarrat crust forms.',
+    time:'90 min', servings:6, diff:'Medium', kcal:'560',
+    tags:['Spanish','Rice','Saffron','Outdoor'],
+    ingredients:['Bomba or Calasparra rice, 2 cups','Chicken & rabbit pieces','Green beans & butter beans','Saffron, large pinch','Smoked paprika','Garlic, tomato','Olive oil, chicken stock'],
+    steps:['Heat olive oil; brown chicken and rabbit.','Add green beans; cook 5 minutes.','Make a sofrito with garlic and grated tomato.','Add paprika and saffron-infused stock.','Sprinkle rice evenly; do not stir.','Cook on medium then low until stock absorbs.','Crank heat briefly for socarrat crust. Rest.']
+  },
+  // AMERICAS
+  { id:11, emoji:'🌮', name:'Tacos al Pastor', country:'Mexico', flag:'🇲🇽', region:'mexico', continent:'americas',
+    desc:'Mexico City\'s iconic street taco — marinated pork shaved from a vertical spit (trompo), served in warm corn tortillas with pineapple, onion, cilantro, and salsa verde.',
+    time:'3 hrs', servings:8, diff:'Medium', kcal:'340',
+    tags:['Mexican','Street Food','Pork','Grilled'],
+    ingredients:['1.5kg pork shoulder, thin sliced','Dried chillies (guajillo, ancho)','Pineapple juice, achiote paste','Corn tortillas','Pineapple, onion, cilantro','Salsa verde, lime'],
+    steps:['Blend marinade from chillies, achiote, pineapple juice.','Marinate pork slices overnight.','Stack pork on skewer or roast in oven.','Slice thin and sear on hot griddle.','Serve in warm tortillas with toppings.']
+  },
+  { id:12, emoji:'🍲', name:'Feijoada', country:'Brazil', flag:'🇧🇷', region:'americas', continent:'americas',
+    desc:'Brazil\'s national dish — a deeply satisfying black bean and pork stew with cured meats, served with rice, farofa, collard greens, and orange slices to cut the richness.',
+    time:'4 hrs', servings:8, diff:'Medium', kcal:'750',
+    tags:['Brazilian','Beans','Slow Cook','Weekend'],
+    ingredients:['Black beans, 500g dried','Cured pork ribs & sausage','Smoked meats variety','Garlic, onion, bay leaves','Orange slices','White rice, farofa','Couve (collard greens)'],
+    steps:['Soak beans overnight.','Simmer cured meats to reduce salt.','Cook beans with bay leaves 1.5 hours.','Brown meats; add to beans.','Fry garlic-onion; season the pot.','Slow simmer all together 1 more hour.','Serve with all accompaniments.']
+  },
+  { id:13, emoji:'🍗', name:'Ceviche', country:'Peru', flag:'🇵🇪', region:'peru', continent:'americas',
+    desc:'Peru\'s national treasure — fresh raw fish "cooked" in lime juice (leche de tigre) with ají amarillo, red onion, and cilantro. Bright, spicy, and utterly refreshing.',
+    time:'20 min', servings:4, diff:'Easy', kcal:'180',
+    tags:['Peruvian','Seafood','No-Cook','Fresh'],
+    ingredients:['500g sea bass or halibut, cubed','Lime juice, 1 cup fresh','Ají amarillo paste, 1 tbsp','Red onion, thinly sliced','Fresh cilantro','Ginger, garlic','Salt, white pepper','Sweet potato & corn to serve'],
+    steps:['Cube fish; season with salt 5 minutes.','Combine lime juice, ají amarillo, ginger, garlic.','Pour over fish; marinate 10 minutes only.','Add red onion and cilantro.','Serve immediately with sweet potato and corn.']
+  },
+  // MIDDLE EAST
+  { id:14, emoji:'🧆', name:'Lamb Mansaf', country:'Jordan', flag:'🇯🇴', region:'middleeast', continent:'middleeast',
+    desc:'Jordan\'s grand celebration dish — tender lamb slow-cooked in jameed (fermented dried yogurt sauce) served over saffron rice and flatbread, garnished with almonds.',
+    time:'3 hrs', servings:8, diff:'Hard', kcal:'720',
+    tags:['Jordanian','Lamb','Celebration','Traditional'],
+    ingredients:['Leg of lamb, 2kg','Jameed (dried yogurt), 500g','Basmati rice, 3 cups','Toasted almonds & pine nuts','Saffron, cardamom, cloves','Flatbread (shrak)','Ghee','Fresh parsley'],
+    steps:['Dissolve jameed in water to make sauce.','Brown lamb in ghee with spices.','Add jameed broth; simmer 2 hours.','Cook saffron rice in lamb broth.','Arrange: flatbread, rice, lamb, then sauce.','Garnish generously with toasted nuts.']
+  },
+  { id:15, emoji:'🥙', name:'Shawarma', country:'Lebanon', flag:'🇱🇧', region:'middleeast', continent:'middleeast',
+    desc:'The Middle East\'s iconic street food — marinated chicken or lamb stacked on a vertical rotisserie, wrapped in flatbread with garlic sauce, pickles, and fresh vegetables.',
+    time:'35 min', servings:4, diff:'Easy', kcal:'480',
+    tags:['Lebanese','Street Food','Quick','Chicken'],
+    ingredients:['600g chicken thighs','Shawarma spice mix','Garlic toum (sauce)','Pita or taboon bread','Tomato, cucumber, onion','Pickled turnip, sumac','Tahini sauce','Fresh parsley'],
+    steps:['Marinate chicken in spices and oil.','Grill or pan-cook until charred.','Slice thin or shred.','Warm pita bread.','Layer with garlic toum, chicken, vegetables.','Drizzle tahini; roll tightly.']
+  },
+  // QUICK (under 30min)
+  { id:16, emoji:'🍳', name:'Shakshuka', country:'Israel / Tunisia', flag:'🇹🇳', region:'middleeast', continent:'middleeast',
+    desc:'Eggs poached in a spiced tomato-pepper sauce. A morning staple across the Middle East and North Africa — ready in 20 minutes, best eaten from the pan.',
+    time:'20 min', servings:2, diff:'Easy', kcal:'320',
+    tags:['Quick','Breakfast','Vegetarian','Spiced'],
+    ingredients:['4 eggs','Canned tomatoes, 400g','Red & green peppers','Onion, garlic','Cumin, paprika, chilli flakes','Olive oil','Fresh parsley or coriander'],
+    steps:['Sauté onions and peppers in olive oil.','Add garlic and spices; toast 1 minute.','Pour in tomatoes; simmer 10 minutes.','Make wells; crack eggs into sauce.','Cover and cook until whites set.','Serve directly in pan with crusty bread.']
+  },
+  { id:17, emoji:'🍣', name:'Salmon Teriyaki', country:'Japan', flag:'🇯🇵', region:'japan', continent:'asia',
+    desc:'Glazed salmon fillets in a sweet-savoury teriyaki sauce, ready in 20 minutes. Serve over steamed rice with pickled ginger and sesame seeds.',
+    time:'20 min', servings:2, diff:'Easy', kcal:'410',
+    tags:['Japanese','Quick','Fish','Healthy'],
+    ingredients:['2 salmon fillets','Soy sauce, 3 tbsp','Mirin, 2 tbsp','Sake, 1 tbsp','Sugar, 1 tbsp','Sesame oil','Sesame seeds, green onions'],
+    steps:['Mix teriyaki sauce ingredients.','Score salmon skin.','Pan-sear skin-side down 4 minutes.','Flip; pour sauce over fish.','Glaze repeatedly as sauce reduces.','Serve over rice with garnishes.']
+  },
+  { id:18, emoji:'🥞', name:'Ful Medames', country:'Egypt', flag:'🇪🇬', region:'africa', continent:'africa',
+    desc:'Egypt\'s breakfast of champions for 5,000 years — slow-simmered fava beans mashed with garlic, lemon, and cumin, drizzled with olive oil. Simple and deeply satisfying.',
+    time:'25 min', servings:4, diff:'Easy', kcal:'290',
+    tags:['Egyptian','Breakfast','Vegan','Quick'],
+    ingredients:['Canned fava beans, 2 cans','Garlic, 4 cloves','Lemon juice','Ground cumin, paprika','Olive oil','Fresh parsley','Tomatoes & eggs to serve'],
+    steps:['Heat beans in their liquid.','Mash partially with fork.','Add crushed garlic and cumin.','Stir in lemon juice and olive oil.','Season generously.','Top with parsley, olive oil, and serve with pita.']
+  },
+];
+
+// ── RENDER ──
+let currentFilter = 'all';
+let currentSearch = '';
+
+function getDiffClass(d) {
+  if(d==='Easy') return 'diff-easy';
+  if(d==='Hard') return 'diff-hard';
+  return 'diff-medium';
+}
+
+function getBg(continent) {
+  const map = {africa:'#FFF3E0',asia:'#E8F5E9',europe:'#E3F2FD',americas:'#FCE4EC',middleeast:'#F3E5F5'};
+  return map[continent] || '#F5F5F5';
+}
+
+function renderCard(r, delay=0) {
+  return `<div class="recipe-card" style="animation-delay:${delay}ms" onclick="openRecipe(${r.id})">
+    <div class="rc-visual" style="background:${getBg(r.continent)}">
+      <span>${r.emoji}</span>
+      <span class="rc-flag">${r.flag}</span>
+      <div class="rc-diff ${getDiffClass(r.diff)}">${r.diff}</div>
+    </div>
+    <div class="rc-body">
+      <div class="rc-region">${r.country}</div>
+      <div class="rc-name">${r.name}</div>
+      <div class="rc-desc">${r.desc.substring(0,90)}…</div>
+      <div class="rc-meta">
+        <span>⏱ ${r.time}</span>
+        <span>👤 ${r.servings}</span>
+        <span>🔥 ${r.diff}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderAll() {
+  let filtered = recipes.filter(r => {
+    const regionMatch = currentFilter==='all' ||
+      r.continent===currentFilter || r.region===currentFilter;
+    const searchMatch = !currentSearch ||
+      r.name.toLowerCase().includes(currentSearch) ||
+      r.country.toLowerCase().includes(currentSearch) ||
+      r.tags.some(t=>t.toLowerCase().includes(currentSearch));
+    return regionMatch && searchMatch;
+  });
+  document.getElementById('recipeGrid').innerHTML = filtered.length
+    ? filtered.map((r,i)=>renderCard(r,i*60)).join('')
+    : '<p style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)">No recipes found. Try a different search or filter.</p>';
+  document.getElementById('recipeCount').textContent = `${filtered.length} recipe${filtered.length!==1?'s':''}`;
+}
+
+function filterRegion(region, btn) {
+  currentFilter = region;
+  currentSearch = '';
+  document.getElementById('searchInput').value = '';
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.region-pill').forEach(p=>p.classList.remove('active'));
+  renderAll();
+  document.getElementById('all-recipes').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function doSearch(val) {
+  currentSearch = val.toLowerCase().trim();
+  currentFilter = 'all';
+  renderAll();
+}
+
+// Spotlight sidebar
+function renderSpotlight() {
+  const picks = [recipes[1], recipes[5], recipes[8], recipes[11]];
+  document.getElementById('spotlightList').innerHTML = picks.map(r=>`
+    <div class="sl-item" onclick="openRecipe(${r.id})">
+      <div class="sl-emoji">${r.emoji}</div>
+      <div class="sl-info">
+        <div class="sl-region">${r.flag} ${r.country}</div>
+        <div class="sl-name">${r.name}</div>
+        <div class="sl-meta">⏱ ${r.time} · ${r.diff}</div>
+      </div>
+      <div class="sl-arrow">›</div>
+    </div>`).join('');
+}
+
+// Quick & easy
+function renderQuick() {
+  const quick = recipes.filter(r=>r.tags.includes('Quick') || parseInt(r.time)<=30).slice(0,4);
+  document.getElementById('quickGrid').innerHTML = quick.map(r=>`
+    <div class="wide-card" onclick="openRecipe(${r.id})">
+      <div class="wc-visual" style="background:${getBg(r.continent)}">${r.emoji}</div>
+      <div class="wc-body">
+        <div class="wc-region">${r.flag} ${r.country}</div>
+        <div class="wc-name">${r.name}</div>
+        <div class="wc-desc">${r.desc.substring(0,100)}…</div>
+        <div class="wc-meta"><span>⏱ ${r.time}</span><span>🔥 ${r.diff}</span><span>🍴 ${r.servings} servings</span></div>
+      </div>
+    </div>`).join('');
+}
+
+// Modal
+function openRecipe(id) {
+  const r = recipes.find(x=>x.id===id);
+  if(!r) return;
+  document.getElementById('modalContent').innerHTML = `
+    <div class="modal-hero" style="background:${getBg(r.continent)}">
+      <span style="font-size:8rem">${r.emoji}</span>
+      <div class="modal-origin-badge">${r.flag} ${r.country}</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-region">${r.continent.toUpperCase()} · ${r.region.toUpperCase()}</div>
+      <h2 class="modal-title">${r.name}</h2>
+      <p class="modal-desc">${r.desc}</p>
+      <div class="modal-stats">
+        <div class="mstat"><div class="mstat-val">${r.time}</div><div class="mstat-key">Total Time</div></div>
+        <div class="mstat"><div class="mstat-val">${r.servings}</div><div class="mstat-key">Servings</div></div>
+        <div class="mstat"><div class="mstat-val">${r.diff}</div><div class="mstat-key">Difficulty</div></div>
+        <div class="mstat"><div class="mstat-val">${r.kcal}</div><div class="mstat-key">kcal / serving</div></div>
+      </div>
+      <h3 class="modal-section-title">Ingredients</h3>
+      <div class="ingredients-grid">
+        ${r.ingredients.map(i=>`<div class="ingredient">${i}</div>`).join('')}
+      </div>
+      <h3 class="modal-section-title">Method</h3>
+      <ol class="steps-list">
+        ${r.steps.map((s,i)=>`<li class="step"><div class="step-num">${i+1}</div><div class="step-text">${s}</div></li>`).join('')}
+      </ol>
+      <div class="modal-tags">${r.tags.map(t=>`<span class="modal-tag">${t}</span>`).join('')}</div>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(e) {
+  if(!e || e.target===document.getElementById('modalOverlay') || e.currentTarget.tagName==='BUTTON') {
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal({}); });
+
+// Init
+renderAll();
+renderSpotlight();
+renderQuick();
+</script>
+</body>
+</html>
