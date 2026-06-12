@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saveur Monde — Recipes From Every Corner of the World</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1C150D;
+  --parchment: #FAF6EE;
+  --paper: #F3EDE0;
+  --spice: #C4501A;
+  --saffron: #E8A020;
+  --sage: #5A7A52;
+  --terracotta: #A84830;
+  --cream: #EDE6D4;
+  --muted: #8A7860;
+  --border: #D8CDB8;
+  --white: #FFFFFF;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body { font-family:'Outfit',sans-serif; background:var(--parchment); color:var(--ink); cursor:default; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:var(--paper); }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+/* ── NAV ── */
+nav {
+  position:sticky; top:0; z-index:900;
+  background:rgba(250,246,238,.95); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 2.5rem; height:68px;
+}
+.logo {
+  font-family:'Cormorant Garamond',serif; font-size:1.7rem; font-weight:600;
+  color:var(--ink); letter-spacing:.5px; cursor:pointer;
+}
+.logo em { color:var(--spice); font-style:italic; }
+.nav-center { display:flex; gap:.3rem; }
+.nav-btn {
+  padding:.45rem 1.1rem; border:none; background:transparent;
+  font-family:'Outfit',sans-serif; font-size:.8rem; font-weight:500;
+  color:var(--muted); cursor:pointer; border-radius:20px;
+  letter-spacing:.5px; text-transform:uppercase; transition:all .2s;
+}
+.nav-btn:hover, .nav-btn.active { background:var(--ink); color:var(--parchment); }
+.nav-search {
+  display:flex; align-items:center; gap:.5rem;
+  background:var(--paper); border:1px solid var(--border);
+  border-radius:24px; padding:.35rem .35rem .35rem 1rem;
+}
+.nav-search input {
+  border:none; background:transparent; font-family:'Outfit',sans-serif;
+  font-size:.85rem; color:var(--ink); width:180px; outline:none;
+}
+.nav-search input::placeholder { color:var(--muted); }
+.search-go {
+  background:var(--spice); color:var(--white); border:none;
+  width:30px; height:30px; border-radius:50%; cursor:pointer; font-size:.85rem;
+  display:flex; align-items:center; justify-content:center; transition:background .2s;
+}
+.search-go:hover { background:var(--terracotta); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 560px;
+  background: var(--ink);
+  display: flex; align-items: stretch;
+  overflow: hidden; position: relative;
+}
+.hero-map-bg {
+  position:absolute; inset:0; opacity:.07;
+  background-image: radial-gradient(circle at 20% 50%, var(--saffron) 0%, transparent 40%),
+    radial-gradient(circle at 80% 30%, var(--spice) 0%, transparent 35%),
+    radial-gradient(circle at 60% 80%, var(--sage) 0%, transparent 30%);
+}
+.hero-left {
+  flex:1; padding:5rem 3rem 5rem 4rem; display:flex;
+  flex-direction:column; justify-content:center; position:relative; z-index:1;
+}
+.hero-eyebrow {
+  display:inline-flex; align-items:center; gap:.5rem;
+  font-size:.7rem; text-transform:uppercase; letter-spacing:2.5px;
+  color:var(--saffron); margin-bottom:1.5rem;
+}
+.hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--saffron); }
+.hero-title {
+  font-family:'Cormorant Garamond',serif; font-size:4.2rem; line-height:1.05;
+  color:var(--white); font-weight:300; margin-bottom:1.2rem;
+}
+.hero-title strong { font-weight:600; color:var(--saffron); display:block; }
+.hero-sub { color:#B5A898; font-size:1rem; line-height:1.7; max-width:460px; margin-bottom:2.2rem; }
+.hero-cta-row { display:flex; gap:1rem; flex-wrap:wrap; }
+.btn-spice {
+  background:var(--spice); color:var(--white); border:none;
+  padding:.8rem 1.8rem; border-radius:4px; font-family:'Outfit',sans-serif;
+  font-size:.85rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase;
+  cursor:pointer; transition:all .2s;
+}
+.btn-spice:hover { background:var(--terracotta); transform:translateY(-1px); }
+.btn-ghost {
+  background:transparent; color:var(--white); border:1px solid rgba(255,255,255,.25);
+  padding:.8rem 1.8rem; border-radius:4px; font-family:'Outfit',sans-serif;
+  font-size:.85rem; font-weight:500; letter-spacing:.5px; text-transform:uppercase;
+  cursor:pointer; transition:all .2s;
+}
+.btn-ghost:hover { border-color:var(--saffron); color:var(--saffron); }
+.hero-stats { display:flex; gap:2.5rem; margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.1); }
+.hstat-num { font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--saffron); line-height:1; }
+.hstat-label { font-size:.7rem; text-transform:uppercase; letter-spacing:1px; color:#7A6A5A; margin-top:.2rem; }
+
+.hero-right {
+  flex:0 0 460px; position:relative; z-index:1;
+  display:flex; align-items:center; justify-content:center; padding:3rem;
+}
+.hero-featured-card {
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1);
+  border-radius:12px; overflow:hidden; cursor:pointer; transition:transform .3s;
+  width:100%; max-width:380px;
+}
+.hero-featured-card:hover { transform:scale(1.02); }
+.hfc-visual {
+  height:220px; display:flex; align-items:center; justify-content:center;
+  font-size:7rem; position:relative;
+  background:linear-gradient(135deg, rgba(200,80,26,.3), rgba(90,122,82,.2));
+}
+.hfc-tag {
+  position:absolute; top:1rem; left:1rem;
+  background:var(--saffron); color:var(--ink); font-size:.65rem; font-weight:700;
+  padding:.25rem .7rem; border-radius:3px; text-transform:uppercase; letter-spacing:1px;
+}
+.hfc-body { padding:1.2rem 1.4rem 1.4rem; }
+.hfc-origin { font-size:.7rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--saffron); margin-bottom:.4rem; }
+.hfc-name { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--white); margin-bottom:.5rem; line-height:1.2; }
+.hfc-meta { display:flex; gap:1rem; font-size:.75rem; color:#8A7860; }
+
+/* ── REGIONS ── */
+.regions-strip {
+  background:var(--ink); padding:1.2rem 2.5rem;
+  display:flex; gap:.6rem; overflow-x:auto; align-items:center;
+  border-bottom:1px solid #2C2018;
+}
+.regions-strip::-webkit-scrollbar { height:3px; }
+.region-pill {
+  flex-shrink:0; display:flex; align-items:center; gap:.5rem;
+  padding:.45rem 1rem; border-radius:20px;
+  border:1px solid rgba(255,255,255,.12); color:#9A8878;
+  font-size:.78rem; font-weight:500; cursor:pointer; transition:all .2s;
+  white-space:nowrap;
+}
+.region-pill:hover, .region-pill.active { background:var(--spice); border-color:var(--spice); color:var(--white); }
+.region-flag { font-size:1rem; }
+
+/* ── SECTIONS ── */
+.section { padding:3.5rem 2.5rem; max-width:1280px; margin:0 auto; }
+.sec-header { display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:2.5rem; }
+.sec-eyebrow { font-size:.65rem; text-transform:uppercase; letter-spacing:2px; color:var(--spice); margin-bottom:.4rem; }
+.sec-title { font-family:'Cormorant Garamond',serif; font-size:2.4rem; font-weight:400; color:var(--ink); line-height:1.1; }
+.sec-title em { font-style:italic; color:var(--spice); }
+.view-all {
+  font-size:.8rem; text-transform:uppercase; letter-spacing:1px;
+  color:var(--spice); cursor:pointer; border-bottom:1px solid var(--spice);
+  padding-bottom:.1rem; white-space:nowrap; transition:opacity .2s;
+}
+.view-all:hover { opacity:.7; }
+
+/* ── RECIPE GRID ── */
+.recipe-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; }
+.recipe-card {
+  background:var(--white); border:1px solid var(--border); border-radius:10px;
+  overflow:hidden; cursor:pointer; transition:all .25s;
+  animation: fadeUp .5s ease both;
+}
+.recipe-card:hover { transform:translateY(-5px); box-shadow:0 12px 32px rgba(28,21,13,.12); border-color:var(--spice); }
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+.rc-visual {
+  height:180px; display:flex; align-items:center; justify-content:center;
+  font-size:4rem; position:relative; overflow:hidden;
+}
+.rc-flag {
+  position:absolute; top:.6rem; right:.6rem; font-size:1.3rem;
+  background:rgba(255,255,255,.9); border-radius:4px; padding:.15rem .3rem;
+}
+.rc-diff {
+  position:absolute; top:.6rem; left:.6rem; font-size:.65rem; font-weight:700;
+  padding:.2rem .5rem; border-radius:3px; text-transform:uppercase; letter-spacing:.5px;
+}
+.diff-easy { background:#D4EDDA; color:#1E5C2A; }
+.diff-medium { background:#FFF3CD; color:#856404; }
+.diff-hard { background:#FADBD8; color:#922B21; }
+.rc-body { padding:1rem 1.1rem 1.2rem; }
+.rc-region { font-size:.65rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--muted); margin-bottom:.3rem; }
+.rc-name { font-family:'Cormorant Garamond',serif; font-size:1.15rem; font-weight:600; color:var(--ink); margin-bottom:.4rem; line-height:1.3; }
+.rc-desc { font-size:.78rem; color:var(--muted); line-height:1.5; margin-bottom:.8rem; }
+.rc-meta { display:flex; gap:1rem; font-size:.72rem; color:var(--muted); }
+.rc-meta span { display:flex; align-items:center; gap:.25rem; }
+
+/* ── FEATURED ROW (wide cards) ── */
+.wide-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+.wide-card {
+  display:flex; background:var(--white); border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; cursor:pointer; transition:all .25s;
+}
+.wide-card:hover { transform:translateY(-3px); box-shadow:0 10px 28px rgba(28,21,13,.1); }
+.wc-visual {
+  flex:0 0 160px; display:flex; align-items:center; justify-content:center;
+  font-size:4.5rem;
+}
+.wc-body { flex:1; padding:1.2rem 1.4rem; display:flex; flex-direction:column; justify-content:center; }
+.wc-region { font-size:.65rem; text-transform:uppercase; letter-spacing:1.5px; color:var(--spice); margin-bottom:.3rem; }
+.wc-name { font-family:'Cormorant Garamond',serif; font-size:1.35rem; font-weight:600; color:var(--ink); margin-bottom:.4rem; }
+.wc-desc { font-size:.8rem; color:var(--muted); line-height:1.55; margin-bottom:.8rem; }
+.wc-meta { display:flex; gap:1rem; font-size:.72rem; color:var(--muted); }
+
+/* ── WORLD MAP STRIP ── */
+.world-strip {
+  background: linear-gradient(135deg, #1C150D 0%, #2D1F0F 50%, #1C150D 100%);
+  padding:4rem 2.5rem; text-align:center; position:relative; overflow:hidden;
+}
+.world-strip::before {
+  content:'🌍'; position:absolute; font-size:20rem; opacity:.04;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.ws-title { font-family:'Cormorant Garamond',serif; font-size:2.6rem; color:var(--white); font-weight:300; margin-bottom:.6rem; position:relative; }
+.ws-title em { color:var(--saffron); font-style:italic; }
+.ws-sub { color:#7A6A5A; margin-bottom:2.5rem; position:relative; font-size:.9rem; }
+.continent-btns { display:flex; flex-wrap:wrap; justify-content:center; gap:.8rem; position:relative; }
+.cont-btn {
+  display:flex; align-items:center; gap:.6rem;
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  color:#C8B898; padding:.7rem 1.4rem; border-radius:6px; cursor:pointer;
+  font-family:'Outfit',sans-serif; font-size:.85rem; transition:all .2s;
+}
+.cont-btn:hover { background:var(--spice); border-color:var(--spice); color:var(--white); }
+.cont-btn .cont-icon { font-size:1.3rem; }
+
+/* ── CUISINE SPOTLIGHT ── */
+.spotlight-grid { display:grid; grid-template-columns:1.4fr 1fr; gap:2rem; align-items:start; }
+.spotlight-main {
+  background:var(--ink); border-radius:14px; overflow:hidden; cursor:pointer; transition:transform .3s;
+}
+.spotlight-main:hover { transform:scale(1.01); }
+.sm-visual {
+  height:300px; display:flex; align-items:center; justify-content:center;
+  font-size:9rem; position:relative;
+  background:linear-gradient(160deg, #2D1F0F, #3D2A18);
+}
+.sm-badge {
+  position:absolute; bottom:1.2rem; left:1.5rem;
+  background:var(--saffron); color:var(--ink); font-size:.65rem; font-weight:700;
+  padding:.3rem .8rem; border-radius:3px; text-transform:uppercase; letter-spacing:1px;
+}
+.sm-body { padding:1.8rem 2rem 2rem; }
+.sm-origin { font-size:.7rem; text-transform:uppercase; letter-spacing:2px; color:var(--saffron); margin-bottom:.5rem; }
+.sm-name { font-family:'Cormorant Garamond',serif; font-size:2.2rem; color:var(--white); margin-bottom:.7rem; font-weight:400; }
+.sm-desc { color:#9A8878; font-size:.9rem; line-height:1.7; margin-bottom:1.2rem; }
+.sm-tags { display:flex; flex-wrap:wrap; gap:.4rem; }
+.tag {
+  font-size:.68rem; text-transform:uppercase; letter-spacing:.5px;
+  border:1px solid rgba(255,255,255,.15); color:#9A8878;
+  padding:.25rem .65rem; border-radius:3px;
+}
+.spotlight-list { display:flex; flex-direction:column; gap:1rem; }
+.sl-item {
+  display:flex; align-items:center; gap:1rem;
+  background:var(--white); border:1px solid var(--border); border-radius:10px;
+  padding:.9rem 1rem; cursor:pointer; transition:all .2s;
+}
+.sl-item:hover { border-color:var(--spice); box-shadow:0 4px 12px rgba(28,21,13,.08); }
+.sl-emoji { font-size:2rem; flex-shrink:0; }
+.sl-info { flex:1; }
+.sl-region { font-size:.63rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+.sl-name { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; color:var(--ink); }
+.sl-meta { font-size:.72rem; color:var(--muted); margin-top:.2rem; }
+.sl-arrow { color:var(--border); font-size:1.1rem; }
+
+/* ── RECIPE MODAL ── */
+.modal-overlay {
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(28,21,13,.7); backdrop-filter:blur(6px);
+  align-items:center; justify-content:center; padding:2rem;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--parchment); border-radius:16px; width:100%; max-width:800px;
+  max-height:90vh; overflow-y:auto; position:relative;
+  animation: modalIn .3s ease;
+}
+@keyframes modalIn { from { opacity:0; transform:scale(.95); } to { opacity:1; transform:scale(1); } }
+.modal-close {
+  position:sticky; top:1rem; float:right; margin:1rem 1rem 0 0;
+  background:var(--ink); color:var(--white); border:none;
+  width:36px; height:36px; border-radius:50%; cursor:pointer;
+  font-size:1.1rem; z-index:10; display:flex; align-items:center; justify-content:center;
+}
+.modal-hero {
+  height:240px; display:flex; align-items:center; justify-content:center;
+  font-size:8rem; background:linear-gradient(135deg, var(--paper), var(--cream));
+  position:relative;
+}
+.modal-origin-badge {
+  position:absolute; bottom:1rem; left:1.5rem;
+  background:var(--spice); color:var(--white);
+  font-size:.7rem; font-weight:600; padding:.3rem .8rem;
+  border-radius:4px; text-transform:uppercase; letter-spacing:1px;
+}
+.modal-body { padding:1.5rem 2rem 2.5rem; }
+.modal-region { font-size:.7rem; text-transform:uppercase; letter-spacing:2px; color:var(--spice); margin-bottom:.4rem; }
+.modal-title { font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:400; margin-bottom:.6rem; line-height:1.1; }
+.modal-desc { color:var(--muted); line-height:1.75; margin-bottom:1.5rem; font-size:.95rem; }
+.modal-stats { display:flex; gap:1.5rem; padding:1.2rem 1.5rem; background:var(--paper); border-radius:8px; margin-bottom:2rem; flex-wrap:wrap; }
+.mstat { text-align:center; }
+.mstat-val { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--spice); }
+.mstat-key { font-size:.65rem; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+.modal-section-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; margin-bottom:1rem; color:var(--ink); }
+.ingredients-grid { display:grid; grid-template-columns:1fr 1fr; gap:.4rem .8rem; margin-bottom:2rem; }
+.ingredient {
+  display:flex; align-items:center; gap:.6rem; font-size:.875rem;
+  padding:.4rem 0; border-bottom:1px solid var(--border); color:var(--ink);
+}
+.ingredient::before { content:'·'; color:var(--spice); font-size:1.4rem; line-height:1; flex-shrink:0; }
+.steps-list { list-style:none; }
+.step { display:flex; gap:1rem; margin-bottom:1.2rem; align-items:flex-start; }
+.step-num {
+  flex-shrink:0; width:28px; height:28px; border-radius:50%;
+  background:var(--spice); color:var(--white);
+  display:flex; align-items:center; justify-content:center;
+  font-size:.75rem; font-weight:700; margin-top:.1rem;
+}
+.step-text { font-size:.875rem; color:var(--muted); line-height:1.7; padding-top:.1rem; }
+.modal-tags { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.5rem; }
+.modal-tag {
+  background:var(--paper); border:1px solid var(--border); color:var(--muted);
+  font-size:.72rem; padding:.3rem .7rem; border-radius:20px; text-transform:uppercase; letter-spacing:.5px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background:var(--ink); color:#6A5A48; padding:3rem 2.5rem 2rem;
+  border-top:1px solid #2C2018;
+}
+.footer-top { display:flex; gap:3rem; margin-bottom:2.5rem; flex-wrap:wrap; }
+.footer-logo { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:var(--saffron); margin-bottom:.8rem; }
+.footer-tagline { font-size:.8rem; color:#5A4A38; line-height:1.6; max-width:220px; }
+.footer-col h4 { font-size:.7rem; text-transform:uppercase; letter-spacing:2px; color:#8A7060; margin-bottom:.8rem; }
+.footer-col a { display:block; font-size:.82rem; color:#5A4A38; margin-bottom:.4rem; cursor:pointer; text-decoration:none; transition:color .2s; }
+.footer-col a:hover { color:var(--saffron); }
+.footer-bottom { border-top:1px solid #2C2018; padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
+.footer-copy { font-size:.75rem; }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1100px) { .recipe-grid { grid-template-columns:repeat(3,1fr); } }
+@media(max-width:850px) {
+  .recipe-grid { grid-template-columns:repeat(2,1fr); }
+  .wide-grid { grid-template-columns:1fr; }
+  .spotlight-grid { grid-template-columns:1fr; }
+  .hero { flex-direction:column; }
+  .hero-right { display:none; }
+  .hero-title { font-size:2.8rem; }
+}
+@media(max-width:600px) {
+  .recipe-grid { grid-template-columns:1fr; }
+  nav { padding:0 1rem; }
+  .nav-center { display:none; }
+  .section { padding:2rem 1rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Saveur<em>Monde</em></div>
+  <div class="nav-center">
+    <button class="nav-btn active" onclick="filterRegion('all',this)">All</button>
+    <button class="nav-btn" onclick="filterRegion('africa',this)">Africa</button>
+    <button class="nav-btn" onclick="filterRegion('asia',this)">Asia</button>
+    <button class="nav-btn" onclick="filterRegion('europe',this)">Europe</button>
+    <button class="nav-btn" onclick="filterRegion('americas',this)">Americas</button>
+    <button class="nav-btn" onclick="filterRegion('middleeast',this)">Middle East</button>
+  </div>
+  <div class="nav-search">
+    <input type="text" id="searchInput" placeholder="Search a dish or country…" oninput="doSearch(this.value)">
+    <button class="search-go">🔍</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-map-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Global Kitchen</div>
+    <h1 class="hero-title">
+      Taste Every<br>
+      <strong>Corner of Earth</strong>
+    </h1>
+    <p class="hero-sub">From smoky West African stews to delicate Japanese ramen, discover authentic recipes passed down through generations — all in one place.</p>
+    <div class="hero-cta-row">
+      <button class="btn-spice" onclick="document.getElementById('all-recipes').scrollIntoView({behavior:'smooth'})">Explore Recipes</button>
+      <button class="btn-ghost" onclick="filterRegion('africa',null)">African Cuisine ↗️</button>
+    </div>
+    <div class="hero-stats">
+      <div><div class="hstat-num">80+</div><div class="hstat-label">Recipes</div></div>
+      <div><div class="hstat-num">6</div><div class="hstat-label">Continents</div></div>
+      <div><div class="hstat-num">40+</div><div class="hstat-label">Countries</div></div>
+    </div>
+  </div>
+  <div clas
